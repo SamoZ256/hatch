@@ -8,7 +8,6 @@ void Serializer::Serialize(std::ostream& output_stream) {
     // Header
     Header header{
         .version = hatch.version,
-        .title_id = hatch.title_id,
         .sections =
             {
                 {static_cast<u32>(sizeof(Header)),
@@ -38,7 +37,6 @@ void Deserializer::Deserialize(std::istream& input_stream) {
     }
 
     hatch.version = (header.version);
-    hatch.title_id = header.title_id;
 
     // Memory patch
     {
