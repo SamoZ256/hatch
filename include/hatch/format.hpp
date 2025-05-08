@@ -14,7 +14,7 @@ struct Section {
 };
 
 enum class SectionType {
-    CodePatch = 0,
+    MemoryPatch = 0,
 
     Count,
 };
@@ -27,7 +27,7 @@ struct Header {
     Section sections[(u32)SectionType::Count];
 };
 
-struct CodePatchEntry {
+struct MemoryPatchEntry {
     u64 addr;
     u32 value;
 };

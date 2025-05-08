@@ -4,7 +4,7 @@
 
 #include "hatch/format.hpp"
 
-TOML11_DEFINE_CONVERSION_NON_INTRUSIVE(Hatch::CodePatchEntry, addr, value)
+TOML11_DEFINE_CONVERSION_NON_INTRUSIVE(Hatch::MemoryPatchEntry, addr, value)
 
 namespace Hatch {
 
@@ -20,20 +20,20 @@ void Builder::Build(const std::string& input_str, std::ostream& output_stream,
     // Title ID
     header.title_id = toml::find<u64>(source, "title_id");
 
-    // Code patches
-    auto code_patch =
-        toml::find<std::vector<CodePatchEntry>>(source, "code_patch");
-    header.sections[(u32)SectionType::CodePatch] = {
+    // Memory patch
+    auto memory_patch =
+        toml::find<std::vector<MemoryPatchEntry>>(source, "memory_patch");
+    header.sections[(u32)SectionType::MemoryPatch] = {
         static_cast<u32>(sizeof(Header)),
-        static_cast<u32>(code_patch.size() * sizeof(CodePatchEntry))};
+        static_cast<u32>(memory_patch.size() * sizeof(MemoryPatchEntry))};
 
     // Write
 
     // Header
     writer.Write(header);
 
-    // Code patch
-    for (const auto& entry : code_patch)
+    // Memory patch
+    for (const auto& entry : memory_patch)
         writer.Write(entry);
 }
 

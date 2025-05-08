@@ -21,12 +21,12 @@ void Parser::Parse(std::istream& input_stream) {
     version = header.version;
     title_id = header.title_id;
 
-    // Code patch
+    // Memory patch
     {
-        const auto& section = header.sections[(u32)SectionType::CodePatch];
-        const u32 entry_count = section.size / sizeof(CodePatchEntry);
-        code_patch.resize(entry_count);
-        reader.ReadPtr(code_patch.data(), entry_count);
+        const auto& section = header.sections[(u32)SectionType::MemoryPatch];
+        const u32 entry_count = section.size / sizeof(MemoryPatchEntry);
+        memory_patch.resize(entry_count);
+        reader.ReadPtr(memory_patch.data(), entry_count);
     }
 }
 

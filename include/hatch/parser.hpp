@@ -14,14 +14,14 @@ class Parser {
     // Getters
     u32 GetVersion() const { return version; }
     u64 GetTitleID() const { return title_id; }
-    const std::vector<CodePatchEntry>& GetCodePatch() const {
-        return code_patch;
+    const std::vector<MemoryPatchEntry>& GetCodePatch() const {
+        return memory_patch;
     }
 
   private:
     u32 version{invalid<u32>()};
     u64 title_id{invalid<u64>()};
-    std::vector<CodePatchEntry> code_patch;
+    std::vector<MemoryPatchEntry> memory_patch;
 };
 
 } // namespace Hatch
