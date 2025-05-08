@@ -4,8 +4,6 @@
 
 namespace Hatch {
 
-constexpr u32 CURRENT_VERSION = 1;
-
 struct BuildOptions {};
 
 class Builder {

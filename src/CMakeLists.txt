@@ -1,5 +1,6 @@
 add_library(hatch-lib
     builder.cpp
+    parser.cpp
 )
 
 target_include_directories(hatch-lib PUBLIC ../include)

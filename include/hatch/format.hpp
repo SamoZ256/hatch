@@ -6,11 +6,25 @@ namespace Hatch {
 
 constexpr u32 MAGIC = make_magic4('H', 'T', 'C', 'H');
 
+constexpr u32 CURRENT_VERSION = 1;
+
+struct Section {
+    u64 offset;
+    u64 size;
+};
+
+enum class SectionType {
+    CodePatch = 0,
+
+    Count,
+};
+
 struct Header {
     magic_t magic{MAGIC};
+    u32 version{CURRENT_VERSION};
     u32 header_size{sizeof(Header)};
     u64 title_id;
-    u32 code_patch_entry_count;
+    Section sections[(u32)SectionType::Count];
 };
 
 struct CodePatchEntry {

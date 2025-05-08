@@ -13,21 +13,23 @@ void Builder::Build(const std::string& input_str, std::ostream& output_stream,
     auto source = toml::parse_str(input_str);
     StreamWriter writer(output_stream);
 
+    Header header{};
+
     // Parse
 
     // Title ID
-    u64 title_id = toml::find<u64>(source, "title_id");
+    header.title_id = toml::find<u64>(source, "title_id");
 
     // Code patches
     auto code_patch =
         toml::find<std::vector<CodePatchEntry>>(source, "code_patch");
+    header.sections[(u32)SectionType::CodePatch] = {
+        static_cast<u32>(sizeof(Header)),
+        static_cast<u32>(code_patch.size() * sizeof(CodePatchEntry))};
 
     // Write
 
     // Header
-    Header header{.title_id = title_id,
-                  .code_patch_entry_count =
-                      static_cast<u32>(code_patch.size())};
     writer.Write(header);
 
     // Code patch

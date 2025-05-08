@@ -61,7 +61,7 @@ class StreamReader {
         return result;
     }
 
-    template <typename T> void Read(T* ptr, usize count) {
+    template <typename T> void ReadPtr(T* ptr, usize count) {
         stream.read(reinterpret_cast<char*>(ptr), count * sizeof(T));
     }
 
