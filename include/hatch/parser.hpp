@@ -9,19 +9,13 @@ class Parser {
     Parser() = default;
     ~Parser() = default;
 
-    void Parse(std::istream& input_stream);
+    void Parse(std::string& input_str);
 
     // Getters
-    u32 GetVersion() const { return version; }
-    u64 GetTitleID() const { return title_id; }
-    const std::vector<MemoryPatchEntry>& GetCodePatch() const {
-        return memory_patch;
-    }
+    const Hatch& GetHatch() const { return hatch; }
 
   private:
-    u32 version{invalid<u32>()};
-    u64 title_id{invalid<u64>()};
-    std::vector<MemoryPatchEntry> memory_patch;
+    Hatch hatch;
 };
 
 } // namespace Hatch

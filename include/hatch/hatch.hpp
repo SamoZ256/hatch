@@ -1,4 +1,4 @@
 #pragma once
 
-#include "hatch/builder.hpp"
-#include "hatch/format.hpp"
+#include "hatch/binary.hpp"
+#include "hatch/parser.hpp"

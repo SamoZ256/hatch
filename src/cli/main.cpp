@@ -7,7 +7,6 @@
 int main(int argc, char* argv[]) {
     std::string input_filename;
     std::string output_filename;
-    Hatch::BuildOptions options{};
 
     // TODO: use a proper argument parser
     // TODO: allow version overriding
@@ -31,9 +30,13 @@ int main(int argc, char* argv[]) {
     std::ofstream output_stream(output_filename,
                                 std::ios::out | std::ios::binary);
 
-    // Build
-    Hatch::Builder builder;
-    builder.Build(input_str, output_stream, options);
+    // Parse
+    Hatch::Parser parser;
+    parser.Parse(input_str);
+
+    // Serialize
+    Hatch::Serializer serializer(parser.GetHatch());
+    serializer.Serialize(output_stream);
 
     // Cleanup
     output_stream.close();

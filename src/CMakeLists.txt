@@ -1,5 +1,5 @@
 add_library(hatch-lib
-    builder.cpp
+    binary.cpp
     parser.cpp
 )
 
