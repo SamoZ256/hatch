@@ -1,4 +1,5 @@
 #include <fstream>
+#include <sstream>
 #include <string>
 
 #include "hatch/hatch.hpp"
@@ -19,12 +20,22 @@ int main(int argc, char* argv[]) {
 
     // TODO: verify filenames
 
-    std::ifstream input_stream(input_filename);
-    std::ofstream output_stream(output_filename);
+    // Input
+    std::ifstream input_stream(input_filename, std::ios::in);
+    std::ostringstream oss;
+    oss << input_stream.rdbuf();
+    std::string input_str = oss.str();
 
+    // Output
+    // TODO: make intermediate directories
+    std::ofstream output_stream(output_filename,
+                                std::ios::out | std::ios::binary);
+
+    // Build
     Hatch::Builder builder;
-    builder.Build(input_stream, output_stream, options);
+    builder.Build(input_str, output_stream, options);
 
+    // Cleanup
     output_stream.close();
     input_stream.close();
 
