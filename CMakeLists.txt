@@ -21,3 +21,5 @@ add_executable(hatch-cli
 )
 
 target_link_libraries(hatch-cli PRIVATE hatch)
+
+install(TARGETS hatch-cli DESTINATION bin)
