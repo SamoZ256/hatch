@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "hatch/common.hpp"
 
 namespace Hatch {
